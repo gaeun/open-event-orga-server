@@ -62,6 +62,12 @@ def connect_instagram():
     instagram_auth_url, state = instagram.authorization_url(InstagramOAuth.get_auth_uri(), access_type='offline')
     return redirect(instagram_auth_url)
 
+@profile.route('/google_connect', methods=('GET', 'POST'))
+def connect_google():
+    google = get_google_auth()
+    google_auth_url, state = google.authorization_url(OAuth.get_auth_uri(), access_type='offline')
+    return redirect(google_auth_url)
+
 @profile.route('/<int:user_id>/editfiles/bgimage', methods=('POST', 'DELETE'))
 def bgimage_upload(user_id):
     if request.method == 'POST':

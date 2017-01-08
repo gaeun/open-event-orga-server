@@ -14,7 +14,6 @@
 {% block content %}
 
     <div style="display: block;">
-        {% if profile.user_detail.facebook %}
         <div class="row" style="margin-bottom:20px">
 
             <div class="col-md-6 col-xs-6">
@@ -27,8 +26,14 @@
                            disabled />
                     {% if not user_id %}
                         <div class="input-group-btn">
-                            <a type="button" class="btn btn-info"
-                               style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% if profile.user_detail.facebook %}
+                                <a type="button" class="btn btn-info"
+                                   style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% else %}
+                                <a type="button" class="btn btn-info"
+                                   href="{{ url_for('profile.connect_facebook') }}"
+                                   style="margin-bottom: 0">{{ _("Connect") }}</a>
+                            {% endif %}
                         </div>
                     {% endif %}
 
@@ -37,7 +42,6 @@
             </div>
 
         </div>
-        {% endif %}
 
         <div class="row" style="margin-bottom:20px">
             <div class="col-md-6 col-xs-6">
@@ -51,8 +55,14 @@
                            disabled />
                     {% if not user_id %}
                         <div class="input-group-btn">
-                            <a type="button" class="btn btn-info"
-                               style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% if profile.user_detail.twitter %}
+                                <a type="button" class="btn btn-info"
+                                   style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% else %}
+                                <a type="button" class="btn btn-info"
+                                   href="{{ url_for('profile.connect_twitter') }}"
+                                   style="margin-bottom: 0">{{ _("Connect") }}</a>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>
@@ -70,8 +80,14 @@
                            disabled />
                     {% if not user_id %}
                         <div class="input-group-btn">
-                            <a type="button" class="btn btn-info"
-                               style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% if profile.user_detail.instagram %}
+                                <a type="button" class="btn btn-info"
+                                   style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% else %}
+                                <a type="button" class="btn btn-info"
+                                   href="{{ url_for('profile.connect_instagram') }}"
+                                   style="margin-bottom: 0">{{ _("Connect") }}</a>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>
@@ -90,8 +106,14 @@
                            disabled />
                     {% if not user_id %}
                         <div class="input-group-btn">
-                            <a type="button" class="btn btn-info"
-                               style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% if profile.user_detail.google %}
+                                <a type="button" class="btn btn-info"
+                                   style="margin-bottom: 0">{{ _("Connected") }}</a>
+                            {% else %}
+                                <a type="button" class="btn btn-info"
+                                   href="{{ url_for('profile.connect_google') }}"
+                                   style="margin-bottom: 0">{{ _("Connect") }}</a>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>
