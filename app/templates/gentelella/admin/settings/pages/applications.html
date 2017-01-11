@@ -14,6 +14,7 @@
 {% block content %}
 
     <div style="display: block;">
+        {% if profile.user_detail.facebook %}
         <div class="row" style="margin-bottom:20px">
 
             <div class="col-md-6 col-xs-6">
@@ -34,6 +35,8 @@
                                    href="{{ url_for('profile.connect_facebook') }}"
                                    style="margin-bottom: 0">{{ _("Connect") }}</a>
                             {% endif %}
+                            <a type="button" class="btn btn-info"
+                               style="margin-bottom: 0">{{ _("Connected") }}</a>
                         </div>
                     {% endif %}
 
@@ -42,6 +45,7 @@
             </div>
 
         </div>
+        {% endif %}
 
         <div class="row" style="margin-bottom:20px">
             <div class="col-md-6 col-xs-6">
@@ -63,6 +67,8 @@
                                    href="{{ url_for('profile.connect_twitter') }}"
                                    style="margin-bottom: 0">{{ _("Connect") }}</a>
                             {% endif %}
+                            <a type="button" class="btn btn-info"
+                               style="margin-bottom: 0">{{ _("Connected") }}</a>
                         </div>
                     {% endif %}
                 </div>
@@ -88,6 +94,8 @@
                                    href="{{ url_for('profile.connect_instagram') }}"
                                    style="margin-bottom: 0">{{ _("Connect") }}</a>
                             {% endif %}
+                            <a type="button" class="btn btn-info"
+                               style="margin-bottom: 0">{{ _("Connected") }}</a>
                         </div>
                     {% endif %}
                 </div>
@@ -114,6 +122,8 @@
                                    href="{{ url_for('profile.connect_google') }}"
                                    style="margin-bottom: 0">{{ _("Connect") }}</a>
                             {% endif %}
+                            <a type="button" class="btn btn-info"
+                               style="margin-bottom: 0">{{ _("Connected") }}</a>
                         </div>
                     {% endif %}
                 </div>

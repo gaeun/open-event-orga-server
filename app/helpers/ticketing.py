@@ -224,12 +224,14 @@ class TicketingManager(object):
             if not discount:
                 flash('The promotional code entered is not valid. No offer has been applied to this order.', 'danger')
             else:
+                order.discount_code = discount
                 flash('The promotional code entered is valid.offer has been applied to this order.', 'success')
         ticket_subtotals = []
         if from_organizer:
             ticket_subtotals = form.getlist('ticket_subtotals[]')
 
         amount = 0
+        total_discount= 0
         for index, id in enumerate(ticket_ids):
             if not string_empty(id) and int(ticket_quantity[index]) > 0:
                 with db.session.no_autoflush:
@@ -239,15 +241,18 @@ class TicketingManager(object):
                     order.tickets.append(order_ticket)
 
                     if from_organizer:
-                        amount += int(ticket_subtotals[index])
+                        amount += float(ticket_subtotals[index])
                     else:
                         amount += (order_ticket.ticket.price * order_ticket.quantity)
-        if discount and discount.type=="amount":
-            order.amount = max(amount-discount.value,0)
+                        if discount and discount.type == "amount":
+                            total_discount += discount.value * order_ticket.quantity
+
+        if discount and discount.type == "amount":
+            order.amount = max(amount - total_discount,0)
         elif discount:
-            order.amount=amount-(discount.value*amount/100)
+            order.amount = amount - (discount.value * amount / 100.0)
         else:
-            order.amount=amount
+            order.amount = amount
 
         if login.current_user.is_authenticated:
             order.user_id = login.current_user.id
